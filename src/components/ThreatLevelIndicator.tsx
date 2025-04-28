@@ -2,6 +2,7 @@
 import React from "react";
 import { useGuardian } from "@/contexts/GuardianContext";
 import { Shield, AlertTriangle, AlertCircle, AlertOctagon } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ThreatLevelIndicator = () => {
   const { currentThreatLevel } = useGuardian();
@@ -58,7 +59,7 @@ const ThreatLevelIndicator = () => {
       <div className={`${color} ${currentThreatLevel === "danger" ? "animate-pulse-slow" : ""}`}>
         {icon}
       </div>
-      <div>
+      <div className="flex-1">
         <h3 className={`font-semibold ${color}`}>Threat Level: {label}</h3>
         <p className="text-sm text-gray-600 dark:text-gray-300">
           {currentThreatLevel === "safe" && "No immediate threats detected."}
@@ -66,6 +67,14 @@ const ThreatLevelIndicator = () => {
           {currentThreatLevel === "warning" && "Potential risks in your area. Exercise caution."}
           {currentThreatLevel === "danger" && "Imminent danger detected. Seek safe haven immediately."}
         </p>
+      </div>
+      <div>
+        <Link 
+          to="/locations" 
+          className="text-sm font-medium text-guardian-primary hover:underline"
+        >
+          Find Safe Locations
+        </Link>
       </div>
     </div>
   );
