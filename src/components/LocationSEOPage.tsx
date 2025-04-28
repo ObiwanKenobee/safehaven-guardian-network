@@ -14,7 +14,7 @@ interface LocationSEOPageProps {
 }
 
 const LocationSEOPage = ({ location }: LocationSEOPageProps) => {
-  const { setCurrentThreatLevel } = useGuardian();
+  const { currentThreatLevel } = useGuardian();
   const isMobile = useIsMobile();
   
   // Set SEO metadata
@@ -22,18 +22,6 @@ const LocationSEOPage = ({ location }: LocationSEOPageProps) => {
     location,
     canonicalUrl: `https://guardian-io.org/locations/${location.id}`
   });
-  
-  // Update the threat level based on location data
-  React.useEffect(() => {
-    const threatLevelMapping = {
-      'low': 'safe',
-      'moderate': 'caution',
-      'high': 'warning',
-      'critical': 'danger'
-    };
-    
-    setCurrentThreatLevel(threatLevelMapping[location.threatLevel] as any);
-  }, [location, setCurrentThreatLevel]);
   
   return (
     <div className="container mx-auto px-4 py-8">

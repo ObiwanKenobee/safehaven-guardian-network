@@ -67,7 +67,7 @@ export const useSEO = ({ title, description, canonicalUrl, location }: SEOProps)
         "keywords": location.keywords.join(', ')
       };
 
-      let script = document.querySelector('#guardian-io-structured-data');
+      let script = document.querySelector('#guardian-io-structured-data') as HTMLScriptElement | null;
       if (script) {
         document.head.removeChild(script);
       }
@@ -75,7 +75,7 @@ export const useSEO = ({ title, description, canonicalUrl, location }: SEOProps)
       script = document.createElement('script');
       script.id = 'guardian-io-structured-data';
       script.type = 'application/ld+json';
-      script.text = JSON.stringify(structuredData);
+      script.textContent = JSON.stringify(structuredData);
       document.head.appendChild(script);
     }
 
